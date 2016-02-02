@@ -10,16 +10,16 @@ import NotFound from './views/notfound.jsx';
 class MeetingApp extends React.Component {
    render() {
       return (
-      <div>
-         <Header>
-            <Navigation/>
-         </Header>
+         <div>
+            <Header>
+               <Navigation/>
+            </Header>
 
-         {this.props.children}
+            {this.props.children}
 
-      </div>
-   );
-  }
+         </div>
+      );
+   }
 }
 
 const router = (
