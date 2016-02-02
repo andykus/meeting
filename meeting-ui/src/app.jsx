@@ -1,21 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router'
-import NotFound from './notfound.jsx';
-import Agenda from './agenda.jsx';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router'
+import Header from './components/header.jsx';
+import Navigation from './components/navigation.jsx';
+import Agenda from './views/agenda.jsx';
+import Overview from './views/overview.jsx';
+import NotFound from './views/notfound.jsx';
 
 class MeetingApp extends React.Component {
-  render() {
-    return <h2>Default meeting page!</h2>;
+	render() {
+		return (
+		<div>
+			<Header>
+				<Navigation/>
+			</Header>
+
+			{this.props.children}
+
+		</div>
+	);
   }
 }
 
 const router = (
-	<Router history={browserHistory}>
+	<Router history={hashHistory}>
 		<Route path="/" component={MeetingApp}>
+			<IndexRoute component={Overview}/>
 			<Route path="agenda" component={Agenda}/>
+			<Route path="*" component={NotFound}/>
 		</Route>
-		<Route path="*" component={NotFound}/>
 	</Router>
 );
 
