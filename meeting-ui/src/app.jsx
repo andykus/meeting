@@ -8,34 +8,34 @@ import Overview from './views/overview.jsx';
 import NotFound from './views/notfound.jsx';
 
 class MeetingApp extends React.Component {
-	render() {
-		return (
-		<div>
-			<Header>
-				<Navigation/>
-			</Header>
+   render() {
+      return (
+      <div>
+         <Header>
+            <Navigation/>
+         </Header>
 
-			{this.props.children}
+         {this.props.children}
 
-		</div>
-	);
+      </div>
+   );
   }
 }
 
 const router = (
-	<Router history={hashHistory}>
-		<Route path="/" component={MeetingApp}>
-			<IndexRoute component={Overview}/>
-			<Route path="agenda" component={Agenda}/>
-			<Route path="*" component={NotFound}/>
-		</Route>
-	</Router>
+   <Router history={hashHistory}>
+      <Route path="/" component={MeetingApp}>
+         <IndexRoute component={Overview}/>
+         <Route path="agenda" component={Agenda}/>
+         <Route path="*" component={NotFound}/>
+      </Route>
+   </Router>
 );
 
 document.addEventListener('DOMContentLoaded', () => {
-	const appContainer = document.createElement('div');
+   const appContainer = document.createElement('div');
 
-	document.body.appendChild(appContainer);
+   document.body.appendChild(appContainer);
 
-	ReactDOM.render(router, appContainer);
+   ReactDOM.render(router, appContainer);
 });
