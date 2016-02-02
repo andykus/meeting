@@ -6,9 +6,7 @@ import Agenda from './agenda.jsx';
 
 class MeetingApp extends React.Component {
   render() {
-    return (
-		<h2>Default meeting page!</h2>
-	);
+    return <h2>Default meeting page!</h2>;
   }
 }
 
@@ -26,5 +24,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	document.body.appendChild(appContainer);
 
-    ReactDOM.render(router, appContainer);
+	ReactDOM.render(router, appContainer);
 });
