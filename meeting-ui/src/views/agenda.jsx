@@ -1,8 +1,14 @@
 import React from 'react';
+import InputText from '../components/input/input.text.jsx';
 
 class Agenda extends React.Component {
    render() {
-      return <h3>Agenda</h3>
+      return (
+      	<div>
+	      	<h3>Agenda</h3>
+	      	<InputText model={new Backbone.Model()} prop="myProp">Titel</InputText>
+      	</div>
+	  );
    }
 }
 
