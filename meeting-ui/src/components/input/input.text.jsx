@@ -28,8 +28,8 @@ class InputText extends React.Component {
    render() {
       return (
          <input value={this.state.value} 
-               placeholder={this.props.children} 
-               onBlur={this.updateValueFromUserInput.bind(this)} />
+                placeholder={this.props.children} 
+                onBlur={this.updateValueFromUserInput.bind(this)} />
       );
    }
 }
