@@ -20,6 +20,26 @@ class AgendaController {
 			}
 		]);
 	}
+
+   get(request, result) {
+      result.send({
+         id: request.params.id,
+         name: 'The specific agenda',
+         description: 'I like this agenda. This is a good agenda.',
+         agendaPoints: []
+      });
+   }
+
+   // TODO Train wifi ragequit
+   create(request, result) { }
+
+   // TODO Train wifi ragequit
+   update(request, result) { }
+
+   delete(request, result) {
+      result.status(204);
+      result.send();
+   }
 }
 
 module.exports = new AgendaController();
