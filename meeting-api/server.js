@@ -1,12 +1,14 @@
 'use strict';
 
-// TODO: Find out why ES& import syntax does not work when not using shitty train wifi
 const agendaController = require('./controllers/AgendaController.js');
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
-app.get('/agendas', agendaController.index);
+app.use(bodyParser.json());
+
+app.get('/agendas', agendaController.list);
 app.get('/agendas/:id', agendaController.get);
 app.post('/agendas', agendaController.create);
 app.put('/agendas/:id', agendaController.update);

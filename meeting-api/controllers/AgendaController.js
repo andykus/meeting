@@ -1,45 +1,53 @@
 'use strict';
 
+const agendaDAO = require('../DAO/AgendaDAO.js');
+
 class AgendaController {
-	index(request, result) {
-		result.send([
-			{
-				id: 1, 
-				title: 'Backlog refinement', 
-				description: 'Backlog refinement'
-			},
-			{
-				id: 2,
-				title: 'Sales discussion', 
-				description: 'Discuss if we should sell cats or knäckebröd.'
-			},
-			{
-				id: 3, 
-				title: 'Dummy meeting', 
-				description: 'Meeting for dummies'
-			}
-		]);
+	list(request, result) {
+		agendaDAO.list((error, data) => {
+			result.send(data);
+		});
 	}
 
-   get(request, result) {
-      result.send({
-         id: request.params.id,
-         name: 'The specific agenda',
-         description: 'I like this agenda. This is a good agenda.',
-         agendaPoints: []
-      });
-   }
+	get(request, result) {
+		const requestedId = request.params.id;
 
-   // TODO Train wifi ragequit
-   create(request, result) { }
+		agendaDAO.get(requestedId, (error, data) => {
+			if(data.length === 0) {
+				result.status(404).send();
+				return;
+			}
 
-   // TODO Train wifi ragequit
-   update(request, result) { }
+			result.send(data);
+		});
+	}
 
-   delete(request, result) {
-      result.status(204);
-      result.send();
-   }
+	create(request, result) {
+		agendaDAO.insert(request.body, (error) => {
+			result.status(201).send(request.body);
+		});
+	}
+
+	update(request, result) {
+		const requestedId = request.params.id;
+
+		agendaDAO.update(requestedId, request.body, (error, data) => {
+			if(data.affectedRows === 0) { 
+				result.status(404).send();
+				return; 
+			}
+
+			result.send(request.body);
+		});		
+	}
+
+	delete(request, result) {
+		const requestedId = request.params.id;
+
+		agendaDAO.delete(requestedId, (error, data) => {
+			result.status(204).send();
+		});		
+	}
 }
 
 module.exports = new AgendaController();
