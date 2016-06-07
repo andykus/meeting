@@ -1,18 +1,11 @@
 'use strict';
 
-const mysql = require('mysql');
+const mysql = require('promise-mysql');
 
-const connection = mysql.createConnection({
-	host: '',
-	user: '',
-	password: '',
-	database: ''
+module.exports = mysql.createPool({
+  host: '127.0.0.1',
+  user: 'admin',
+  password: 'admin',
+  database: 'scruffy',
+  connectionLimit: 10
 });
-
-connection.connect(error => {
-	if(error) {
-		throw error;
-	}
-});
-
-module.exports = connection;

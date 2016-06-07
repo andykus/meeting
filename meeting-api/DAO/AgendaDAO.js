@@ -3,26 +3,26 @@
 const db = require('../mysqlConnection.js');
 
 class AgendaDAO {
-	list(callback) {
-		db.query('SELECT * FROM meeting_agendas', callback);
+	list() {
+		return db.query('SELECT * FROM meeting_agendas');
 	}
 
-	get(id, callback) {
-		db.query('SELECT * FROM meeting_agendas WHERE id = ?', [id], callback);
+	get(id) {
+		return db.query('SELECT * FROM meeting_agendas WHERE id = ?', [id]);
 	}
 
-	insert(agenda, callback) {
-		db.query('INSERT INTO meeting_agendas (title, description, duration) VALUES (?, ?, ?)', 
-			[agenda.title, agenda.description, agenda.duration], callback);
+	insert(agenda) {
+		return db.query('INSERT INTO meeting_agendas (title, description, duration) VALUES (?, ?, ?)', 
+			[agenda.title, agenda.description, agenda.duration]);
 	}
 
-	update(id, agenda, callback) {
-		db.query('UPDATE meeting_agendas SET title = ?, description = ?, duration = ? WHERE id = ?',
-			[agenda.title, agenda.description, agenda.duration, id], callback);
+	update(id, agenda) {
+		return db.query('UPDATE meeting_agendas SET title = ?, description = ?, duration = ? WHERE id = ?',
+			[agenda.title, agenda.description, agenda.duration, id]);
 	}
 
-	delete(id, callback) {
-		db.query('DELETE FROM meeting_agendas WHERE id = ?', [id], callback);
+	delete(id) {
+		db.query('DELETE FROM meeting_agendas WHERE id = ?', [id]);
 	}
 }
 
