@@ -1,7 +1,7 @@
 'use strict';
 
 const agendaController = require('./controllers/AgendaController.js');
-const agendaPointController = require('./controllers/AgendaController.js');
+const agendaPointController = require('./controllers/AgendaPointController.js');
 
 const express = require('express');
 const bodyParser = require('body-parser');
