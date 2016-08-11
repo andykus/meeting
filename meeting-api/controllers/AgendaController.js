@@ -1,53 +1,56 @@
 'use strict';
 
 const agendaDAO = require('../DAO/AgendaDAO.js');
+const await = require('asyncawait/await');
+const uuid = require('node-uuid');
 
 class AgendaController {
-    list(request, result) {
-        agendaDAO.list().then((data) => {
-            result.send(data);
-        });
+  list(request, result) {
+    const agendas = await (agendaDAO.list());
+    result.send(agendas);
+  }
+
+  get(request, result) {
+    const agenda = await (agendaDAO.get(request.params.id));
+
+    if (!agenda.length) {
+      return result.sendStatus(404);
     }
 
-    get(request, result) {
-        const requestedId = request.params.id;
+    result.send(agenda[0]);
+  }
 
-        agendaDAO.get(requestedId).then((data) => {
-            if(data.length === 0) {
-                result.status(404).send();
-                return;
-            }
+  create(request, result) {
+    const agenda = this.appendId(uuid.v4(), request.body);
 
-            result.send(data);
-        });
+    await (agendaDAO.insert(agenda));
+    result.status(201).send(agenda);
+  }
+
+  update(request, result) {
+    const agenda = this.appendId(request.params.id, request.body);
+    const updateResult = await (agendaDAO.update(agenda));
+
+    if (!updateResult.affectedRows) {
+      return result.sendStatus(404);
     }
 
-    create(request, result) {
-        agendaDAO.insert(request.body).then(() => {
-            result.status(201).send(request.body);
-        });
+    result.send(agenda);
+  }
+
+  delete(request, result) {
+    const deleteResult = await (agendaDAO.delete(request.params.id));
+
+    if (!deleteResult.affectedRows) {
+      return result.sendStatus(404);
     }
 
-    update(request, result) {
-        const requestedId = request.params.id;
+    result.sendStatus(204);
+  }
 
-        agendaDAO.update(requestedId, request.body).then((data) => {
-            if(data.affectedRows === 0) { 
-                result.status(404).send();
-                return; 
-            }
-
-            result.send(request.body);
-        });     
-    }
-
-    delete(request, result) {
-        const requestedId = request.params.id;
-
-        agendaDAO.delete(requestedId).then(() => {
-            result.status(204).send();
-        });     
-    }
+  appendId(id, data) {
+    return Object.assign({ id }, data);
+  }
 }
 
 module.exports = new AgendaController();

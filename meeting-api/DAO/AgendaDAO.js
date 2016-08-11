@@ -16,9 +16,9 @@ class AgendaDAO {
 			[agenda.title, agenda.description, agenda.duration]);
 	}
 
-	update(id, agenda) {
+	update(agenda) {
 		return db.query('UPDATE meeting_agendas SET title = ?, description = ?, duration = ? WHERE id = ?',
-			[agenda.title, agenda.description, agenda.duration, id]);
+			[agenda.title, agenda.description, agenda.duration, agenda.id]);
 	}
 
 	delete(id) {
