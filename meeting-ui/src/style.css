@@ -1,0 +1,27 @@
+.header {
+	width: 100%;
+	background-color: #0A0A0A;
+	color: #00d5fe;
+	overflow: auto;
+}
+
+.logotype {
+	clear: both;
+	display: inline-block;
+}
+
+.menu {
+	clear: both;
+	display: inline-block;
+}
+
+h3 {
+	padding: 0;
+	margin: 0;
+	line-height: 1.7;
+}
+
+.menu>li>a {
+	line-height: 2;
+	margin: 0;
+}

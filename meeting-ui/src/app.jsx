@@ -6,18 +6,16 @@ import Navigation from './components/navigation.jsx';
 import Agenda from './views/agenda.jsx';
 import Overview from './views/overview.jsx';
 import NotFound from './views/notfound.jsx';
+import { Button, Link } from 'react-foundation';
+
+require('./foundation-icons.css');
+require('./foundation.min.css');
+require('./style.css');
 
 class MeetingApp extends React.Component {
    render() {
       return (
-         <div>
-            <Header>
-               <Navigation/>
-            </Header>
-
-            {this.props.children}
-
-         </div>
+      <Header/>
       );
    }
 }
@@ -27,6 +25,7 @@ const router = (
       <Route path="/" component={MeetingApp}>
          <IndexRoute component={Overview}/>
          <Route path="agenda" component={Agenda}/>
+         <Route path="notfound" component={NotFound}/>
          <Route path="*" component={NotFound}/>
       </Route>
    </Router>
